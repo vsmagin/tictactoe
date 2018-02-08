@@ -1,0 +1,4 @@
+# Add ignored files here
+
+.idea
+node_modules
