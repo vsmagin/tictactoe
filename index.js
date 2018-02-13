@@ -78,6 +78,70 @@ function drawGameBoard(boardSize) {
   return gameBoard.join(' ');
 }
 
+//revised version of drawGameBoard
+function drawBoard(boardSize) {
+  let gameBoard = [];
+  for (let row = 0; row < boardSize * 2; row++) {
+      let colString = [];
+      for (let col = 0; col < boardSize * 2; col++) {
+          if (row == 0) { //if row 0
+              if (col == 0) {
+                  colString.push('  ');
+              }
+              if (col % 2 == 0) {
+                  colString.push(' ');
+              }
+              else {
+                  let num = Math.floor(col / 2) + 1;
+                  if (num > 99) {
+                      colString.push(`${Math.floor(col / 2) + 1}`);
+                  }
+                  else if (num > 9) {
+                      colString.push(` ${Math.floor(col / 2) + 1}`);
+                  }
+                  else {
+                      colString.push(` ${Math.floor(col / 2) + 1} `);
+                  }
+              }
+          }
+          else if (row % 2 == 1) {    //if row is odd (1,3,5,...)
+              if (col == 0) { //if col is 0
+                  let num = Math.floor(row / 2) + 1;
+                  if (num > 99) {
+                      colString.push(`${Math.floor(row / 2) + 1}`);
+                  }
+                  else if (num > 9) {
+                      colString.push(` ${Math.floor(row / 2) + 1}`);
+                  }
+                  else {
+                      colString.push(` ${Math.floor(row / 2) + 1} `);
+                  }
+              }
+              else if (col % 2 == 0) {    //if col is even (2,4,6,...)    
+                  colString.push('|');
+              }
+              else {  //if col is odd (1,3,5,...)
+                  colString.push(' X ');  //Player's SYMBOL goes here
+              }
+          }
+          else {  //if row is even (2,4,6,...)
+              if (col == 0) { //if col is 0
+                  colString.push('   ');
+              }
+              else if (col % 2 == 1) {    //if col is odd (1,3,5,...)
+                  colString.push('---');
+              }
+              else {
+                  colString.push('+');
+              }
+          }
+      }
+      colString.push('\n');
+      gameBoard.push(colString.join(''));
+  }
+  return gameBoard.join('');
+}
+
 function initializeGame() {
   promptUser();
 }
